@@ -62,28 +62,28 @@
           <option>/</option>
         </select>
         <input name="second-num" id="second-num" />
-        <button id="calculate">Calculate</button>
+        <button id="calculate" onclick="num_check()">Calculate</button>
         <br />
         <output></output>
       </fieldset>
     </form>
 
     <section id="error-btns">
-      <button>Console Log</button>
-      <button>Console Error</button>
-      <button>Console Count</button>
-      <button>Console Warn</button>
-      <button>Console Assert</button>
-      <button>Console Clear</button>
-      <button>Console Dir</button>
-      <button>Console dirxml</button>
-      <button>Console Group Start</button>
-      <button>Console Group End</button>
-      <button>Console Table</button>
-      <button>Start Timer</button>
-      <button>End Timer</button>
-      <button>Console Trace</button>
-      <button>Trigger a Global Error</button>
+      <button onclick="log()">Console Log</button>
+      <button onclick="log_error()">Console Error</button>
+      <button onclick="count()">Console Count</button>
+      <button onclick="warn()">Console Warn</button>
+      <button onclick="assert()"> Console Assert</button>
+      <button onclick="console_clear()">Console Clear</button>
+      <button onclick="console_dir()">Console Dir</button>
+      <button onclick="console_dirxml()" id="dirxml_btn">Console dirxml</button>
+      <button onclick="group_start()">Console Group Start</button>
+      <button onclick="group_end()">Console Group End</button>
+      <button onclick="table()">Console Table</button>
+      <button onclick="start_timer()">Start Timer</button>
+      <button onclick="end_timer()">End Timer</button>
+      <button onclick="console_trace()">Console Trace</button>
+      <button onclick="trigger_global_error()">Trigger a Global Error</button>
     </section>
   </main>
 
@@ -102,6 +102,136 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    // console.log
+    function log() {
+      console.log("console log demo");
+    };
+
+    // console.error
+    function log_error() {
+      console.error("console error demo");
+    }
+
+
+    // console count
+    clicks = 0;
+    function count() {
+      clicks++;
+      console.log(`Console count: ${clicks}`);
+    }
+
+    // console.error
+    function warn() {
+      console.warn("console warn demo");
+    }
+    //console assert
+    function assert() {
+      const x = 1;
+      const y = -1;
+      const reason = 'x is expected to not be equal to y';
+      console.assert(x < y, {x, y, reason});
+    }
+
+    // console clear
+    function console_clear() {
+      console.clear();
+    }
+
+    // console dir
+    function console_dir() {
+      console.dir(document.querySelector("section").querySelector("button"));
+    }
+
+    // console dirxml
+    function console_dirxml() {
+      console.dirxml(document.getElementById("dirxml_btn"));
+    }
+
+    // console group start
+    function group_start() {
+      console.group("console group");
+    }
+
+    // console group end
+    function group_end() {
+      console.groupEnd("console group");
+    }
+
+    function table() {
+      console.table([
+      {
+        song: 'happier',
+        artist: 'ed sheeran',
+      },
+      {
+        song: 'young & beautiful',
+        artist: 'lana del rey',
+      },
+      {
+        song: 'snowman',
+        artist: 'sia',
+      }
+    ]);
+    }
+
+    // start time
+    function start_timer() {
+      console.time("Time btn: ");
+    }
+
+    // end time
+    function end_timer() {
+      console.timeEnd("Time btn: ");
+    }
+
+    // trace
+    function console_trace() {
+      console.trace();
+    }
+
+    function num_check() {
+      var first_num = document.getElementById("first-num");
+      var second_num = document.getElementById("second-num");
+      if (isNaN(first_num) || isNaN(second_num)) {
+        if (first_num.toString().toLowerCase() != first_num.toString().toUpperCase()) {
+          throw new MyError();
+        }
+        
+        throw "Input is not a number";
+      }
+    }
+
+    try {
+      arlerte("Welcome to js");
+    }
+    catch(err) {
+      console.error(err.message);
+    }
+    finally {
+      console.log("attempt to print welcome msg");
+    }
+
+    class MyError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'CustomError';
+      }
+    }
+
+    function trigger_global_error() {
+      TrackJS.track('Testing TrackJS!');
+    }
+
+    function badCode() {
+      abooM('bad code!'); /* BAD CODE ON PURPOSE */ 
+    }
+  </script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "55467acb27204793a920dbe960c810f5"
+      // for more configuration options, see https://docs.trackjs.com
+    });
   </script>
 </body>
 
